@@ -10,7 +10,9 @@ from PIL import Image
 import ftfy
 import pan_read
 import aadhaar_read
+import aadhar_back
 import io
+from pan_aadhar_ocr import Pan_Info_Extractor, Aadhar_Info_Extractor, Aadhar_Extractor
 
 
 def read_data(url):
@@ -55,3 +57,8 @@ def read_data(url):
             data = aadhaar_read.adhaar_read_data(text)
             print("aadhaar_read", data)
             return {"data": data, "text": text, "blurrValue": var}
+        elif "address:" in text.lower():
+            extractor = Aadhar_Info_Extractor()
+            add = extractor.find_address(filename)
+            aadhar_back.read_Aadhar_Back(text)
+            # print(add)
