@@ -22,14 +22,16 @@ def qr_aadhar(url):
             received_qr_code_data = code[0].data
             isSecureQR = (isSecureQr(received_qr_code_data))
             if isSecureQR:
-                print("isSecureQR main ghusa")
                 secure_qr = AadhaarSecureQr(int(received_qr_code_data))
+                print("obj", secure_qr)
+                # secure_qr.saveimage("/Users/moreyeahs/Desktop/filename.jpg")
                 decoded_secure_qr_data = secure_qr.decodeddata()
                 print(decoded_secure_qr_data)
                 return {"userData": decoded_secure_qr_data, "isOld": True}
             else:
                 print("qrData", received_qr_code_data)
                 obj = AadhaarOldQr(received_qr_code_data)
+
                 obj = obj.decodeddata()
                 if 'a' in obj:
 
